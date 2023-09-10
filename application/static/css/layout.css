@@ -1,0 +1,10 @@
+body {
+    background: #EEE;
+}
+
+#content {
+    background: white;
+    border: 1px solid #CCC;
+    padding: 15px 20px 30px 35px;
+
+}

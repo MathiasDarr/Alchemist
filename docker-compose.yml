@@ -1,0 +1,32 @@
+version: "3.9"
+networks:
+  server_network:
+    driver: bridge
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:12.11
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password # environment variable that sets the superuser password for PostgreSQL
+      POSTGRES_USER: user # variable that will create the specified user
+      POSTGRES_DB: jazz # the name of your db
+    ports:
+      - 5432:5432
+    networks:
+      - server_network
+
+  alchemist:
+    container_name: alchemist
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./application:/app/application"
+#      - "./migrations:/app/migrations"
+    networks:
+      - server_network
+
